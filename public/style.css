@@ -1,313 +1,332 @@
-/* Paleta de Cores e Variáveis (inspirado na imagem) */
-:root {
-    --primary: #4361ee;
-    --secondary: #3a0ca3;
-    --light-bg: #f5f7ff;
-    --main-bg: #ffffff;
-    --text-dark: #333;
-    --text-light: #6c757d;
-    --shadow-soft: rgba(0, 0, 0, 0.08);
-}
+/* Importa uma fonte similar às usadas pelo Mercado Livre */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-/* Estilos Globais e Reset */
-* {
+/* Configurações Globais e Tipografia */
+body {
+    font-family: 'Roboto', sans-serif; /* Usando Roboto, uma fonte comum em UIs */
+    background-color: #ededed; /* Fundo cinza bem claro */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+    color: #333;
 }
 
-body {
-    background-color: var(--light-bg);
-    color: var(--text-dark);
-    line-height: 1.6;
-    padding: 0;
-}
-
-/* Container principal que emoldura todo o conteúdo */
+/* Container Principal - centralizado e com largura limitada */
 .main-container {
-    background: var(--main-bg);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-soft);
     max-width: 1200px;
-    margin: 30px auto;
-    padding: 2rem;
-    overflow: hidden;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background-color: #ffffff; /* Fundo branco para o conteúdo principal */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Sombra sutil para destacar a área do conteúdo */
 }
 
-/* Barra de Navegação Superior (conforme a imagem) */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(90deg, #4361ee, #3a0ca3); /* Gradiente de fundo */
-    color: white;
-    border-radius: 15px 15px 0 0;
+/* Header - área superior */
+header {
+    background-color: #fff159; /* Amarelo vibrante do Mercado Livre */
+    padding: 15px 20px;
+    text-align: center;
+    margin: 0; /* Remove margem padrão para ocupar largura total */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
-.navbar .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
+header h1 {
+    font-size: 2.2em; /* Tamanho do título */
+    color: #333; /* Cor escura para o texto */
+    font-weight: 700; /* Negrito */
+    margin: 0 0 15px 0; /* Ajusta margem do título */
+    text-transform: uppercase; /* Para um visual mais de "marca" */
     letter-spacing: 1px;
 }
 
-.navbar .nav-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.navbar .nav-links a:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-}
-
-/* Seção do Título e Descrição */
-.title-section {
-    text-align: center;
-    padding: 40px 0;
-}
-
-.title-section h1 {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: var(--secondary);
-    margin-bottom: 0.5rem;
-}
-
-.title-section p {
-    font-size: 1.1em;
-    color: var(--gray);
-}
-
-/* Área de Filtros e Pesquisa */
-.filters-section {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 10px var(--shadow-soft);
-}
-
-.filters-section h2 {
-    font-size: 1.5em;
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-}
-
-.filters-row {
+/* Área de Filtros - imita a barra de navegação inferior do ML */
+.filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1.5rem;
+    justify-content: center;
+    gap: 8px; /* Espaçamento menor entre botões */
+    margin-bottom: 30px;
+    background-color: #ffffff; /* Fundo branco para a barra de filtros */
+    padding: 10px 0;
+    border-bottom: 1px solid #eee; /* Linha sutil de separação */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
 
-.filters-row button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #e9ecef;
-    color: var(--dark);
-    border-radius: 20px;
+.filters button {
+    padding: 8px 18px;
+    border: none; /* Remove borda para visual mais limpo */
+    border-radius: 4px; /* Bordas levemente arredondadas */
+    background-color: #f0f0f0; /* Fundo cinza claro para botões inativos */
     cursor: pointer;
+    font-size: 0.85em;
     font-weight: 500;
-    transition: all 0.3s ease;
+    color: #555;
+    transition: all 0.2s ease;
+    text-transform: capitalize; /* Capitaliza a primeira letra */
 }
 
-.filters-row button.active {
-    background-color: var(--primary);
+.filters button:hover,
+.filters button.active { /* Adicione a classe .active para o botão selecionado */
+    background-color: #3483fa; /* Azul vibrante do Mercado Livre */
     color: white;
-}
-
-.filters-row button:hover {
-    background-color: var(--primary);
-    color: white;
-}
-
-.search-bar {
-    display: flex;
-    width: 100%;
-    border-radius: 50px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px var(--shadow-soft);
-}
-
-.search-bar input {
-    flex-grow: 1;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    outline: none;
-}
-
-.search-bar button {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-bar button:hover {
-    background-color: var(--secondary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 /* Vitrine de Produtos (Grid) */
 #product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cards um pouco menores */
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 20px 0;
+    background-color: #ffffff;
+    border-top: 1px solid #eee;
 }
 
 /* Estilo dos Cards de Produto */
 .product-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--shadow-soft);
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.3s ease;
+    background-color: #fff;
+    border-radius: 6px; /* Bordas mais suaves */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Sombra sutil, como no ML */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    overflow: hidden; /* Garante que nada transborde do card */
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px); /* Efeito de elevação sutil */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Sombra mais destacada no hover */
 }
 
 .product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    width: 100%;
+    height: 160px; /* Altura fixa para as imagens */
+    object-fit: contain; /* Ajusta a imagem sem cortar, mantendo proporção */
+    background-color: #fff; /* Fundo branco para a imagem */
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 5px; /* Pequeno padding para a imagem */
 }
 
 .product-card h3 {
-    font-size: 1.2em;
-    color: var(--secondary);
-    margin-bottom: 0.5rem;
+    font-size: 1.05em;
+    color: #333;
+    margin: 0 0 5px 0;
+    font-weight: 400; /* Mais leve, como nas descrições do ML */
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a 2 linhas */
+    -webkit-box-orient: vertical;
+    min-height: 2.4em; /* Garante altura mínima para 2 linhas */
 }
 
-.product-card p {
-    font-size: 0.9em;
-    color: var(--gray);
+.product-card .price {
+    font-size: 1.6em; /* Preço maior */
+    color: #333; /* Cor padrão, mas pode ser vibrante se houver promoção */
+    font-weight: 700;
+    margin: 8px 0;
 }
 
-.product-card strong {
-    color: var(--dark);
+.product-card .description,
+.product-card .store {
+    font-size: 0.85em;
+    color: #666;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
 }
 
 .product-card a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--primary);
+    display: block; /* Ocupa a largura total */
+    width: calc(100% - 20px); /* Ajusta a largura para padding */
+    text-align: center;
+    background-color: #3483fa; /* Azul do Mercado Livre */
     color: white;
-    border-radius: 25px;
+    padding: 10px;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 500;
-    margin-top: 1rem;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin: 15px auto 0 auto; /* Centraliza o botão com margem superior */
+    transition: background-color 0.2s ease;
 }
 
 .product-card a:hover {
-    background-color: var(--secondary);
+    background-color: #2968c8; /* Azul mais escuro no hover */
 }
 
 /* --- Formulário de Cadastro --- */
 .cadastro-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--shadow-soft);
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .cadastro-form h2 {
-    color: var(--secondary);
+    font-size: 1.6em;
     text-align: center;
-    margin-bottom: 1.5rem;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 600;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
+.cadastro-form label {
     font-weight: 500;
+    color: #4a4a4a;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.form-control {
-    width: 100%;
-    padding: 12px;
+.cadastro-form input,
+.cadastro-form textarea,
+.cadastro-form select {
+    display: block;
+    width: calc(100% - 22px); /* Ajusta para padding e borda */
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 0.95em;
 }
 
 .cadastro-form button {
-    padding: 12px 24px;
-    background: var(--primary);
+    background-color: #3483fa;
     color: white;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 500;
-    display: block;
+    font-size: 1em;
     width: 100%;
-    font-size: 1rem;
-    transition: background 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 .cadastro-form button:hover {
-    background: var(--secondary);
+    background-color: #2968c8;
 }
 
 #message {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 5px;
     text-align: center;
-    font-weight: 500;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 0.9em;
 }
 
-.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Responsividade básica para dispositivos menores */
+/* Responsividade Básica */
 @media (max-width: 768px) {
     .main-container {
-        padding: 1rem;
+        padding: 10px;
     }
+    header h1 {
+        font-size: 1.8em;
+    }
+    .filters button {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+    #product-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    .product-card img {
+        height: 120px;
+    }
+    .product-card h3 {
+        font-size: 0.9em;
+    }
+    .product-card .price {
+        font-size: 1.3em;
+    }
+    .cadastro-form {
+        margin: 20px auto;
+        padding: 20px;
+    }
+}
+/* Estilos básicos para a seção e o container */
+.hero {
+    position: relative;
+    padding-top: 50px; /* Espaço para o cabeçalho, se necessário */
+}
 
-    .filters-row {
-        flex-direction: column;
-    }
+.hero .container {
+    padding: 0;
+}
 
-    .search-bar {
-        flex-direction: column;
-        border-radius: 10px;
-    }
+/* Estilo para cada slide do carrossel */
+.hero__items {
+    height: 400px; /* Altura do slider */
+    background-size: cover; /* Faz a imagem de fundo cobrir todo o espaço */
+    background-position: center center;
+    display: flex;
+    align-items: center; /* Alinha o texto verticalmente ao centro */
+}
 
-    .search-bar input,
-    .search-bar button {
-        border-radius: 0;
-    }
+/* Estilo do texto dentro do slide */
+.hero__text {
+    padding: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para o texto para melhor leitura */
+}
+
+.hero__text h2 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Estilo do botão "Ver Produtos!" */
+.hero__text a {
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3483fa; /* Cor de destaque */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.hero__text a:hover {
+    background-color: #2968c8;
+}
+
+/* Estilos para a navegação do Owl Carousel (setas) */
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    line-height: 40px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.owl-carousel .owl-nav button.owl-prev:hover,
+.owl-carousel .owl-nav button.owl-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.owl-carousel .owl-nav button.owl-prev {
+    left: 15px;
+}
+
+.owl-carousel .owl-nav button.owl-next {
+    right: 15px;
+}
+
+/* Estilos para a paginação (pontos) */
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: #3483fa;
 }
