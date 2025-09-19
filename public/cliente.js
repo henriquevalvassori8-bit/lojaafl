@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (termoBusca) {
                 params.append('termo', termoBusca);
             }
-            if (loja) { // NOVO: Adiciona o parâmetro da loja
+            if (loja) {
                 params.append('loja', loja);
             }
 
@@ -73,8 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Erro desconhecido ao cadastrar produto.');
+                let errorText = await response.text();
+                try {
+                    const errorData = JSON.parse(errorText);
+                    errorText = errorData.error || 'Erro desconhecido.';
+                } catch (e) {
+                    console.error("A resposta não é JSON. Conteúdo:", errorText);
+                    errorText = `Erro do servidor: ${response.status} ${response.statusText}. Por favor, verifique o console para mais detalhes.`;
+                }
+                throw new Error(errorText);
             }
 
             const result = await response.json();
@@ -119,12 +126,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.querySelector('.search-bar input');
         const searchButton = document.querySelector('.search-bar button');
         const filterButtons = document.querySelectorAll('.filters button');
-        const storeButtons = document.querySelectorAll('.stores button'); // NOVO: Seleciona os botões de loja
+        const storeButtons = document.querySelectorAll('.stores button');
 
-        // Inicializa a página carregando todos os produtos
         carregarProdutos({});
 
-        // Adiciona o evento de clique para os botões de filtro de categoria
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -135,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // NOVO: Adiciona o evento de clique para os botões de filtro de loja
         storeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 storeButtons.forEach(btn => btn.classList.remove('active'));
@@ -146,8 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-
-        // Adiciona o evento de clique para o botão de busca
         if (searchButton) {
             searchButton.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -158,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Adiciona o evento de "Enter" no campo de busca
         if (searchInput) {
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
