@@ -1,96 +1,101 @@
-const productContainer = document.getElementById('product-container');
-const filterButtons = document.querySelectorAll('.filter-btn');
-const cadastroForm = document.getElementById('cadastro-produto-form');
-const messageElement = document.getElementById('message');
+document.addEventListener('DOMContentLoaded', function() {
+    // Função principal para carregar os produtos
+    async function carregarProdutos(categoria = null, termoBusca = null) {
+        try {
+            const productsContainer = document.getElementById('products-container');
+            if (!productsContainer) {
+                console.log("Elemento products-container não encontrado. Verifique seu HTML.");
+                return;
+            }
 
-// Função para buscar e exibir os produtos
-const fetchProducts = async (category = 'todos') => {
-  productContainer.innerHTML = 'Carregando...';
-  const url = category === 'todos' ? '/api/produtos' : `/api/produtos?categoria=${category}`;
+            let url = '/api/produtos';
+            const params = new URLSearchParams();
 
-  try {
-    const response = await fetch(url);
-    const products = await response.json();
+            if (categoria) {
+                params.append('categoria', categoria);
+            }
+            if (termoBusca) {
+                params.append('termo', termoBusca);
+            }
 
-    if (products.length === 0) {
-      productContainer.innerHTML = '<p>Nenhum produto encontrado nesta categoria.</p>';
-      return;
+            if (params.toString()) {
+                url += `?${params.toString()}`;
+            }
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Erro ao carregar produtos do servidor.');
+            }
+
+            const produtos = await response.json();
+            productsContainer.innerHTML = '';
+
+            if (produtos.length === 0) {
+                productsContainer.innerHTML = '<p class="no-products">Nenhum produto encontrado.</p>';
+                return;
+            }
+
+            produtos.forEach(produto => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${produto.imagem_url}" alt="${produto.nome}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagem+Nao+Disponivel'">
+                    <h3>${produto.nome}</h3>
+                    <p>${produto.descricao}</p>
+                    <strong>R$ ${parseFloat(produto.preco).toFixed(2)}</strong>
+                    <a href="${produto.link}" target="_blank">Ver Produto!</a>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error.message);
+            const productsContainer = document.getElementById('products-container');
+            if (productsContainer) {
+                productsContainer.innerHTML = '<p class="no-products">Ocorreu um erro ao carregar os produtos. Tente novamente mais tarde.</p>';
+            }
+        }
     }
 
-    productContainer.innerHTML = '';
-    products.forEach(product => {
-      const productCard = document.createElement('div');
-      productCard.className = 'product-card';
-      productCard.innerHTML = `
-        <img src="${product.imagem_url}" alt="${product.nome}">
-        <h3>${product.nome}</h3>
-        <p>${product.descricao}</p>
-        <p><strong>Preço:</strong> R$${parseFloat(product.preco).toFixed(2)}</p>
-        <p><strong>Loja:</strong> ${product.loja}</p>
-        <a href="${product.link}" target="_blank">Ver Produto</a>
-      `;
-      productContainer.appendChild(productCard);
-    });
-  } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
-    productContainer.innerHTML = '<p>Erro ao carregar os produtos.</p>';
-  }
-};
+    // Lógica para a vitrine de produtos (se o elemento existir)
+    const productsContainer = document.getElementById('products-container');
+    if (productsContainer) {
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-bar button');
+        const filterButtons = document.querySelectorAll('.filters button');
 
-// Eventos para os botões de filtro
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const category = button.dataset.category;
-    fetchProducts(category);
-  });
-});
+        // Inicializa a página carregando todos os produtos
+        carregarProdutos();
 
-// Evento para o formulário de cadastro
-cadastroForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+        // Adiciona o evento de clique para os botões de filtro
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const categoria = this.dataset.categoria;
+                carregarProdutos(categoria);
+            });
+        });
 
-  const nome = document.getElementById('nome').value;
-  const categoria = document.getElementById('categoria').value;
-  const descricao = document.getElementById('descricao').value;
-  const preco = parseFloat(document.getElementById('preco').value);
-  const loja = document.getElementById('loja').value;
-  const imagemFile = document.getElementById('imagem').files[0];
-  const link = document.getElementById('link').value;
+        // Adiciona o evento de clique para o botão de busca
+        if (searchButton) {
+            searchButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const termoBusca = searchInput.value.trim();
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                carregarProdutos(null, termoBusca);
+            });
+        }
 
-  const formData = new FormData();
-  formData.append('nome', nome);
-  formData.append('categoria', categoria);
-  formData.append('descricao', descricao);
-  formData.append('preco', preco);
-  formData.append('loja', loja);
-  formData.append('imagem', imagemFile);
-  formData.append('link', link);
-
-  try {
-    const response = await fetch('/api/cadastrar-produto', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      messageElement.textContent = result.message;
-      messageElement.style.color = 'green';
-      cadastroForm.reset();
-      fetchProducts(); // Atualiza a vitrine após o cadastro
-    } else {
-      messageElement.textContent = result.error;
-      messageElement.style.color = 'red';
+        // Adiciona o evento de "Enter" no campo de busca
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const termoBusca = searchInput.value.trim();
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    carregarProdutos(null, termoBusca);
+                }
+            });
+        }
     }
-  } catch (error) {
-    console.error('Erro ao cadastrar produto:', error);
-    messageElement.textContent = 'Erro ao conectar com o servidor.';
-    messageElement.style.color = 'red';
-  }
-});
-
-// Carrega os produtos quando a página é carregada
-document.addEventListener('DOMContentLoaded', () => {
-  fetchProducts();
 });

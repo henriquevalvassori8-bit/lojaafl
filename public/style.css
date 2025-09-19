@@ -1,332 +1,271 @@
-/* Importa uma fonte similar às usadas pelo Mercado Livre */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* Paleta de Cores e Variáveis */
+:root {
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --accent: #f72585;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
+    --bg-color: #f5f7ff;
+}
 
-/* Configurações Globais e Tipografia */
-body {
-    font-family: 'Roboto', sans-serif; /* Usando Roboto, uma fonte comum em UIs */
-    background-color: #ededed; /* Fundo cinza bem claro */
+/* Estilos Globais e Reset */
+* {
     margin: 0;
     padding: 0;
-    line-height: 1.4;
-    color: #333;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Container Principal - centralizado e com largura limitada */
+body {
+    background-color: var(--bg-color);
+    color: var(--dark);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container principal para o conteúdo da página */
 .main-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 15px 20px;
-    background-color: #ffffff; /* Fundo branco para o conteúdo principal */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Sombra sutil para destacar a área do conteúdo */
+    padding: 2rem;
 }
 
-/* Header - área superior */
+/* Estilo do Cabeçalho e Título */
 header {
-    background-color: #fff159; /* Amarelo vibrante do Mercado Livre */
-    padding: 15px 20px;
     text-align: center;
-    margin: 0; /* Remove margem padrão para ocupar largura total */
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
 }
 
 header h1 {
-    font-size: 2.2em; /* Tamanho do título */
-    color: #333; /* Cor escura para o texto */
-    font-weight: 700; /* Negrito */
-    margin: 0 0 15px 0; /* Ajusta margem do título */
-    text-transform: uppercase; /* Para um visual mais de "marca" */
-    letter-spacing: 1px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1rem;
 }
 
-/* Área de Filtros - imita a barra de navegação inferior do ML */
+/* Estilo dos Botões de Filtro */
 .filters {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 8px; /* Espaçamento menor entre botões */
-    margin-bottom: 30px;
-    background-color: #ffffff; /* Fundo branco para a barra de filtros */
-    padding: 10px 0;
-    border-bottom: 1px solid #eee; /* Linha sutil de separação */
-    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    gap: 10px;
+    margin-bottom: 2rem;
 }
 
 .filters button {
-    padding: 8px 18px;
-    border: none; /* Remove borda para visual mais limpo */
-    border-radius: 4px; /* Bordas levemente arredondadas */
-    background-color: #f0f0f0; /* Fundo cinza claro para botões inativos */
+    padding: 10px 20px;
+    border: 1px solid var(--light-gray);
+    background-color: var(--light);
+    color: var(--dark);
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 0.85em;
     font-weight: 500;
-    color: #555;
-    transition: all 0.2s ease;
-    text-transform: capitalize; /* Capitaliza a primeira letra */
+    transition: all 0.3s ease;
 }
 
-.filters button:hover,
-.filters button.active { /* Adicione a classe .active para o botão selecionado */
-    background-color: #3483fa; /* Azul vibrante do Mercado Livre */
+.filters button:hover, .filters button.active {
+    background-color: var(--primary);
     color: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    border-color: var(--primary);
 }
 
-/* Vitrine de Produtos (Grid) */
+/* Vitrine de Produtos - Grid */
 #product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cards um pouco menores */
-    gap: 20px; /* Espaçamento entre os cards */
-    padding: 20px 0;
-    background-color: #ffffff;
-    border-top: 1px solid #eee;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 /* Estilo dos Cards de Produto */
 .product-card {
-    background-color: #fff;
-    border-radius: 6px; /* Bordas mais suaves */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Sombra sutil, como no ML */
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    overflow: hidden; /* Garante que nada transborde do card */
+    background-color: white;
+    border: 1px solid var(--light-gray);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-3px); /* Efeito de elevação sutil */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Sombra mais destacada no hover */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-card img {
-    width: 100%;
-    height: 160px; /* Altura fixa para as imagens */
-    object-fit: contain; /* Ajusta a imagem sem cortar, mantendo proporção */
-    background-color: #fff; /* Fundo branco para a imagem */
-    border-radius: 4px;
-    margin-bottom: 10px;
-    padding: 5px; /* Pequeno padding para a imagem */
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1rem;
 }
 
 .product-card h3 {
-    font-size: 1.05em;
-    color: #333;
-    margin: 0 0 5px 0;
-    font-weight: 400; /* Mais leve, como nas descrições do ML */
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita a 2 linhas */
-    -webkit-box-orient: vertical;
-    min-height: 2.4em; /* Garante altura mínima para 2 linhas */
+    font-size: 1.1em;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
 }
 
-.product-card .price {
-    font-size: 1.6em; /* Preço maior */
-    color: #333; /* Cor padrão, mas pode ser vibrante se houver promoção */
-    font-weight: 700;
-    margin: 8px 0;
+.product-card p {
+    font-size: 0.9em;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
 }
 
-.product-card .description,
-.product-card .store {
-    font-size: 0.85em;
-    color: #666;
-    margin: 0 0 5px 0;
-    line-height: 1.2;
+.product-card strong {
+    color: var(--dark);
 }
 
 .product-card a {
-    display: block; /* Ocupa a largura total */
-    width: calc(100% - 20px); /* Ajusta a largura para padding */
-    text-align: center;
-    background-color: #3483fa; /* Azul do Mercado Livre */
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--accent);
     color: white;
-    padding: 10px;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
     text-decoration: none;
-    font-weight: 600;
-    margin: 15px auto 0 auto; /* Centraliza o botão com margem superior */
-    transition: background-color 0.2s ease;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .product-card a:hover {
-    background-color: #2968c8; /* Azul mais escuro no hover */
+    background-color: #d12267;
 }
 
-/* --- Formulário de Cadastro --- */
+/* Estilo do Formulário de Cadastro */
 .cadastro-form {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff;
+    background-color: white;
+    border: 1px solid var(--light-gray);
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 2rem auto;
 }
 
 .cadastro-form h2 {
-    font-size: 1.6em;
+    color: var(--secondary);
     text-align: center;
-    color: #333;
-    margin-bottom: 25px;
-    font-weight: 600;
+    margin-bottom: 1.5rem;
 }
 
-.cadastro-form label {
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #4a4a4a;
-    margin-bottom: 5px;
-    display: block;
 }
 
-.cadastro-form input,
-.cadastro-form textarea,
-.cadastro-form select {
-    display: block;
-    width: calc(100% - 22px); /* Ajusta para padding e borda */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.95em;
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 .cadastro-form button {
-    background-color: #3483fa;
+    padding: 12px 24px;
+    background: var(--primary);
     color: white;
-    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
+    font-weight: 500;
+    display: block;
     width: 100%;
-    transition: background-color 0.2s ease;
+    font-size: 1rem;
+    transition: background 0.3s ease;
 }
 
 .cadastro-form button:hover {
-    background-color: #2968c8;
+    background: var(--secondary);
 }
 
 #message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
     text-align: center;
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 0.9em;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
 }
 
-/* Responsividade Básica */
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsividade básica para dispositivos menores */
 @media (max-width: 768px) {
-    .main-container {
+    body {
         padding: 10px;
     }
-    header h1 {
-        font-size: 1.8em;
+
+    .main-container {
+        padding: 1rem;
     }
-    .filters button {
-        font-size: 0.8em;
-        padding: 6px 12px;
+
+    .filters {
+        flex-direction: column;
     }
-    #product-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-    }
+
     .product-card img {
-        height: 120px;
+        height: auto;
     }
-    .product-card h3 {
-        font-size: 0.9em;
-    }
-    .product-card .price {
-        font-size: 1.3em;
-    }
+
     .cadastro-form {
-        margin: 20px auto;
-        padding: 20px;
+        padding: 1.5rem;
     }
 }
-/* Estilos básicos para a seção e o container */
-.hero {
-    position: relative;
-    padding-top: 50px; /* Espaço para o cabeçalho, se necessário */
+/* Estilo geral da barra de pesquisa */
+.search-bar {
+    display: flex; /* Alinha o input e o botão lado a lado */
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 50px;
+    overflow: hidden; /* Garante que os filhos não ultrapassem as bordas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.hero .container {
-    padding: 0;
+/* Estilo do campo de texto (input) */
+.search-bar input[type="text"] {
+    flex-grow: 1; /* Faz o input preencher o espaço disponível */
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    outline: none; /* Remove a borda azul ao focar */
 }
 
-/* Estilo para cada slide do carrossel */
-.hero__items {
-    height: 400px; /* Altura do slider */
-    background-size: cover; /* Faz a imagem de fundo cobrir todo o espaço */
-    background-position: center center;
-    display: flex;
-    align-items: center; /* Alinha o texto verticalmente ao centro */
+/* Estilo do botão de pesquisa */
+.search-bar button {
+    background-color: #4361ee; /* Cor principal de destaque */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
 }
 
-/* Estilo do texto dentro do slide */
-.hero__text {
-    padding: 20px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para o texto para melhor leitura */
+.search-bar button:hover {
+    background-color: #3a0ca3; /* Uma cor mais escura no hover */
 }
-
-.hero__text h2 {
-    font-size: 3em;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-/* Estilo do botão "Ver Produtos!" */
-.hero__text a {
-    display: inline-block;
-    font-size: 1em;
-    font-weight: 600;
-    color: #fff;
-    background-color: #3483fa; /* Cor de destaque */
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.hero__text a:hover {
-    background-color: #2968c8;
-}
-
-/* Estilos para a navegação do Owl Carousel (setas) */
-.owl-carousel .owl-nav button.owl-prev,
-.owl-carousel .owl-nav button.owl-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 2em;
-    line-height: 40px;
-    text-align: center;
-    transition: background-color 0.3s;
-}
-
-.owl-carousel .owl-nav button.owl-prev:hover,
-.owl-carousel .owl-nav button.owl-next:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.owl-carousel .owl-nav button.owl-prev {
-    left: 15px;
-}
-
-.owl-carousel .owl-nav button.owl-next {
-    right: 15px;
-}
-
-/* Estilos para a paginação (pontos) */
-.owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots .owl-dot:hover span {
-    background: #3483fa;
+.fa-magnifying-glass:before, .fa-search:before {
+    content: "\f002";
 }
