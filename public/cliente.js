@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
-                    <img src="${produto.imagem_url}" alt="${produto.nome}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagem+Nao+Disponivel'">
+                    <img src="${produto.imagem_url}" alt="${produto.nome}" width="100" height="100" onerror="this.src='https://via.placeholder.com/300x200?text=Imagem+Nao+Disponivel'">
                     <h3>${produto.nome}</h3>
                     <p>${produto.descricao}</p>
-                    <strong>R$ ${parseFloat(produto.preco).toFixed(2)}</strong>
+                    <strong>R$ ${parseFloat(produto.preco).toFixed(2)}</strong><br>
                     <a href="${produto.link}" target="_blank">Ver Produto!</a>
                 `;
                 productsContainer.appendChild(productCard);
