@@ -1,3 +1,4 @@
+// Importa as bibliotecas necessárias
 require('dotenv').config();
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
@@ -22,15 +23,20 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 // Inicializa o cliente Supabase
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Rota para listar todos os produtos, filtrar por categoria e buscar por termo
+// Rota para listar todos os produtos, filtrar por categoria, loja e buscar por termo
 app.get('/api/produtos', async (req, res) => {
-    const { categoria, termo } = req.query;
+    const { categoria, termo, loja } = req.query;
     
     let query = supabase.from('produtos').select('*');
 
     // Filtro por categoria
     if (categoria) {
         query = query.eq('categoria', categoria);
+    }
+    
+    // NOVO: Filtro por loja
+    if (loja) {
+        query = query.eq('loja', loja);
     }
 
     // Filtro por termo de busca (nome ou descrição)
@@ -41,8 +47,9 @@ app.get('/api/produtos', async (req, res) => {
     const { data, error } = await query;
 
     if (error) {
+        // Envia uma mensagem de erro detalhada para o cliente
         console.error('Erro ao buscar produtos:', error);
-        return res.status(500).json({ error: 'Erro ao buscar produtos.' });
+        return res.status(500).json({ error: `Erro ao buscar produtos. Detalhes: ${error.message}` });
     }
 
     res.status(200).json(data);
@@ -61,9 +68,8 @@ app.post('/api/cadastrar-produto', upload.single('imagem'), async (req, res) => 
     const filePath = `produtos/${fileName}`;
 
     try {
-        // Upload da imagem no Supabase Storage
         const { error: uploadError } = await supabase.storage
-            .from('imagens-produtos') // Nome do bucket
+            .from('imagens-produtos')
             .upload(filePath, imagemFile.buffer, {
                 contentType: imagemFile.mimetype,
             });
@@ -73,14 +79,12 @@ app.post('/api/cadastrar-produto', upload.single('imagem'), async (req, res) => 
             return res.status(500).json({ error: 'Erro ao fazer upload da imagem.' });
         }
 
-        // Gera o URL público da imagem
         const { data: publicUrlData } = supabase.storage
             .from('imagens-produtos')
             .getPublicUrl(filePath);
 
         const imagem_url = publicUrlData.publicUrl;
 
-        // Insere o novo produto no banco de dados
         const { error: insertError } = await supabase
             .from('produtos')
             .insert([{
