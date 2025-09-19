@@ -34,7 +34,7 @@ app.get('/api/produtos', async (req, res) => {
         query = query.eq('categoria', categoria);
     }
     
-    // NOVO: Filtro por loja
+    // Filtro por loja
     if (loja) {
         query = query.eq('loja', loja);
     }
@@ -47,7 +47,6 @@ app.get('/api/produtos', async (req, res) => {
     const { data, error } = await query;
 
     if (error) {
-        // Envia uma mensagem de erro detalhada para o cliente
         console.error('Erro ao buscar produtos:', error);
         return res.status(500).json({ error: `Erro ao buscar produtos. Detalhes: ${error.message}` });
     }
@@ -110,12 +109,7 @@ app.post('/api/cadastrar-produto', upload.single('imagem'), async (req, res) => 
     }
 });
 
-// Inicia o servidor apenas em ambiente de desenvolvimento local
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(port, () => {
-        console.log(`Servidor rodando em http://localhost:${port}`);
-    });
-}
 
-// Exporta a aplicação para que a plataforma de hospedagem possa usá-la
+// Exporta a aplicação para que a plataforma de hospedagem possa usá-la.
+// O Netlify reconhecerá automaticamente este export como o handler da sua função.
 module.exports = app;
