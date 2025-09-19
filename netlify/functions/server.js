@@ -4,10 +4,10 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 const multer = require('multer');
+const serverless = require('serverless-http'); // <-- Adicionada a biblioteca
 
 // Inicializa o aplicativo Express
 const app = express();
-const port = 3000;
 
 // Configura o multer para lidar com o upload de arquivos na memória
 const upload = multer({ storage: multer.memoryStorage() });
@@ -110,6 +110,6 @@ app.post('/api/cadastrar-produto', upload.single('imagem'), async (req, res) => 
 });
 
 
-// Exporta a aplicação para que a plataforma de hospedagem possa usá-la.
-// O Netlify reconhecerá automaticamente este export como o handler da sua função.
-module.exports = app;
+// Exporta a aplicação para ser usada pelo Netlify Functions.
+// Esta linha é a principal correção para o erro de 'handler not found'.
+module.exports.handler = serverless(app);
