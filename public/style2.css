@@ -3,7 +3,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f4f7f6;
     color: #333;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -103,4 +103,7 @@ body {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
+}
+.w{
+    display: block;
 }

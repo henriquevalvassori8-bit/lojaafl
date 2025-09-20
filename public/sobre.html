@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastrar Novo Produto</title>
- <link rel="stylesheet" href="style2.css">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -29,49 +29,77 @@
     <link rel="stylesheet" href="css/cssdoindex.css">
 
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .Scontainer {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        strong {
+            color: #e74c3c;
+        }
+        .section-title {
+            color: #3498db;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<center><section id="w" class="cadastro-form">
- <h2>Cadastrar Novo Produto</h2>
-<form id="cadastro-produto-form">
- <label for="nome">Nome do Produto:</label>
-<input type="text" id="nome" name="nome" required>
- 
- <label for="categoria">Categoria:</label>
- <select id="categoria" name="categoria" required>
-<option value="">Selecione a Categoria</option>
- <option value="casa">Casa</option>
-<option value="beleza">Beleza</option>
- <option value="eletronicos">Eletrônicos</option>
- <option value="eletrodomesticos">Eletrodomésticos</option>
-<option value="celular">Celular</option>
-<option value="computadores">Computadores</option>
- </select>
- 
-<label for="descricao">Descrição:</label>
- <textarea id="descricao" name="descricao" required></textarea>
 
- <label for="preco">Preço:</label>
-<input type="number" id="preco" name="preco" step="0.01" required>
+    <div class="Scontainer">
+        <h1>Sobre Nós: Conectando Você aos Melhores Produtos</h1>
+        <p>
+            Seja bem-vindo(a)! Nossa missão é facilitar sua jornada de compras, conectando você a produtos de alta qualidade de diversas lojas renomadas.
+        </p>
 
- <label for="loja">Loja:</label>
- <select id="loja" name="loja" required>
-<option value="">Selecione a Loja</option>
- <option value="shopee">Shopee</option>
- <option value="aliexpress">AliExpress</option>
-<option value="mercado livre">Mercado Livre</option>
- </select>
+        <h2 class="section-title">Como Funciona:</h2>
+        <p>
+            Atuamos como <strong>afiliados</strong>, o que significa que selecionamos e indicamos produtos que acreditamos que farão a diferença na sua vida. Quando você clica em um de nossos links e realiza uma compra, a transação é processada <strong>diretamente no site oficial da loja parceira</strong>.
+        </p>
+        <p>
+            Todo o processo de pagamento e envio é realizado nas plataformas desses sites.
+        </p>
 
- <label for="imagem">Imagem do Produto:</label>
-      <input type="file" id="imagem" name="imagem" accept="image/jpeg" required>
-
- <label for="link">Link do Produto:</label>
- <input type="url" id="link" name="link" required>
-
- <button type="submit">Cadastrar</button>
-<p id="message"></p>
-</section></center><br>
-  <footer class="footer" id="w">
+        <h2 class="section-title">Sua Segurança e Confiança:</h2>
+        <p>
+            Sua segurança é nossa prioridade máxima. É por isso que todas as suas transações são <strong>100% seguras e confiáveis</strong>, pois são concluídas dentro das plataformas de e-commerce já reconhecidas e com sistemas de segurança de ponta.
+        </p>
+        <p>
+            O preço do produto continua o mesmo para você, e ao comprar através dos nossos links, você apoia nosso trabalho e nos ajuda a continuar criando conteúdo relevante para sua jornada de crescimento e desenvolvimento pessoal.
+        </p>
+        <p>
+            Agradecemos sua confiança!
+        </p>
+    </div><br><br>
+  <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -97,6 +125,5 @@
                 </div>
         </div>
     </footer>
-  <script src="cliente.js"></script>
 </body>
 </html>
